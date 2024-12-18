@@ -1,5 +1,5 @@
 from scanner import Scanner
-from mc_token import TokenID
+from tables import TokenID
 
 # E -> TE'
 # T	-> FT’
@@ -34,7 +34,7 @@ class Parser:
         elif self.token.get_id() == TokenID.MINUS:
             self.pMinus(); self.pT(); self.pE_()
         else:
-            ...
+            pass
 
     # T’ -> *FT’ | /FT’ | ε 
     def pT_(self):
@@ -45,7 +45,7 @@ class Parser:
         elif self.token.get_id() == TokenID.DIV:
             self.pDivide(); self.pF(); self.pT_()
         else:
-            ...
+            pass
 
     # F	-> (E) | ID
     def pF(self):

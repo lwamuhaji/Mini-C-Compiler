@@ -1,14 +1,4 @@
 from tables import *
-from enum import Enum
-
-class TokenID(Enum):
-    ID = 3
-    PLUS = 10
-    MINUS = 11
-    MUL = 12
-    DIV = 13
-    OPEN_PARENTHESIS = 34
-    CLOSE_PARENTHESIS = 35
 
 class Token:
     def __init__(self, token, state):
@@ -22,17 +12,17 @@ class Token:
         elif self.state == 4: # 예약어인 경우 keyword table 참조
             return KEYWORD_TABLE[self.token]
         elif self.state == 5: # 10진수
-            return 5
+            return TokenID.DEC
         elif self.state == 52: # 123.123 형태의 실수
-            return 9
+            return TokenID.FLOAT
         elif self.state == 55: # 123.123e-2 형태의 실수
-            return 9
+            return TokenID.FLOAT
         elif self.state == 6: # 그냥 0은 8진수로 처리한다.
-            return 6
+            return TokenID.OCT
         elif self.state == 7: # 8진수
-            return 6
+            return TokenID.OCT
         elif self.state == 9: # 16진수
-            return 7
+            return TokenID.HEX
         elif self.state == 10: # (
             return TokenID.OPEN_PARENTHESIS
         elif self.state == 13: # /
@@ -44,47 +34,47 @@ class Token:
         elif self.state == 19: # *
             return TokenID.MUL
         elif self.state == 20: # %
-            return 14
+            return TokenID.MOD
         elif self.state == 21: # =
-            return 15
+            return TokenID.ASSIGN
         elif self.state == 22: # ==
-            return 19
+            return TokenID.EQUAL
         elif self.state == 23: # !
-            return 16
+            return TokenID.NOT
         elif self.state == 24: # !=
-            return 20
+            return TokenID.NOTEQ
         elif self.state == 26: # && 
-            return 17
+            return TokenID.AND
         elif self.state == 28: # ||
-            return 18
+            return TokenID.OR
         elif self.state == 29: # <
-            return 21
+            return TokenID.LT
         elif self.state == 30: # <=
-            return 23
+            return TokenID.LE
         elif self.state == 31: # >
-            return 22
+            return TokenID.GT
         elif self.state == 32: # >=
-            return 25
+            return TokenID.GE
         elif self.state == 33: # ‘ 여는 따옴표
-            return 38
+            return TokenID.OPEN_QUOTE
         elif self.state == 36: # 상수
-            return 4
+            return TokenID.CONSTANT
         elif self.state == 37: # [
-            return 30
+            return TokenID.OPEN_BRACKET
         elif self.state == 38: # ]
-            return 31
+            return TokenID.CLOSE_BRACKET
         elif self.state == 39: # {
-            return 32
+            return TokenID.OPEN_BRACE
         elif self.state == 40: # }
-            return 33
+            return TokenID.CLOSE_BRACE
         elif self.state == 41: # )
             return TokenID.CLOSE_PARENTHESIS
         elif self.state == 42: # ,
-            return 36
+            return TokenID.COMMA
         elif self.state == 43: # ;
-            return 37
+            return TokenID.SEMI
         elif self.state == 44: # ’ 닫는 따옴표
-            return 39
+            return TokenID.CLOSE_QUOTE
     
     # 토큰의 값을 리턴한다.
     def get_value(self):

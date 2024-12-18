@@ -5,7 +5,7 @@ from parser import Parser
 if __name__ == "__main__":
     # default src
     src = """
-    A ++ B - C
+    A + B - C
     """
 
     if len(sys.argv) == 1:
