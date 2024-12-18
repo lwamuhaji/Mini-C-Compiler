@@ -1,4 +1,14 @@
 from tables import *
+from enum import Enum
+
+class TokenID(Enum):
+    ID = 3
+    PLUS = 10
+    MINUS = 11
+    MUL = 12
+    DIV = 13
+    OPEN_PARENTHESIS = 34
+    CLOSE_PARENTHESIS = 35
 
 class Token:
     def __init__(self, token, state):
@@ -8,7 +18,7 @@ class Token:
     # 토큰의 accept state를 기반으로 아이디를 리턴한다.
     def get_id(self):
         if self.state == 3: # 식별자
-            return 3
+            return TokenID.ID
         elif self.state == 4: # 예약어인 경우 keyword table 참조
             return KEYWORD_TABLE[self.token]
         elif self.state == 5: # 10진수
@@ -24,15 +34,15 @@ class Token:
         elif self.state == 9: # 16진수
             return 7
         elif self.state == 10: # (
-            return 34
+            return TokenID.OPEN_PARENTHESIS
         elif self.state == 13: # /
-            return 13
+            return TokenID.DIV
         elif self.state == 17: # +
-            return 10
+            return TokenID.PLUS
         elif self.state == 18: # -
-            return 11
+            return TokenID.MINUS
         elif self.state == 19: # *
-            return 12
+            return TokenID.MUL
         elif self.state == 20: # %
             return 14
         elif self.state == 21: # =
@@ -68,7 +78,7 @@ class Token:
         elif self.state == 40: # }
             return 33
         elif self.state == 41: # )
-            return 35
+            return TokenID.CLOSE_PARENTHESIS
         elif self.state == 42: # ,
             return 36
         elif self.state == 43: # ;
@@ -91,6 +101,10 @@ class Token:
         else:
             return '-' # 그 외의 경우 토큰의 값은 없다.
     
-    # toString() 메소드 오버라이드
+    # 문자 리턴
+    def get_char(self):
+        return self.token
+
+    # str() 메소드 오버라이드
     def __str__(self):
         return f'({self.get_id()}, {self.get_value()})  {self.token}'

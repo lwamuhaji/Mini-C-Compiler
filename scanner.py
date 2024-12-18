@@ -28,7 +28,7 @@ class Scanner:
         self.line += 1
 
     # 소스파일로부터 토큰을 뽑아낸다.
-    def get_token(self):
+    def get_token(self) -> Token:
         token = ""
         state = 1 # 시작 state
 
