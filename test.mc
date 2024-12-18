@@ -1,11 +1,5 @@
-int A, B, Sum;
-float _x1, _y1, _zoom;
-char _ch1;
+A == 10;
+B = 20;
+C = 30;
+(A+B)/3 + (A*C) - 20;
 
-if (A>B) Sum = A+B;
-else Sum = A + 10 - 0764 * 0xA8FD4;
-
-while (A == B) {
-    _zoom = (Sum + _x1)/10;
-    _ch1 = ‘123’;
-}

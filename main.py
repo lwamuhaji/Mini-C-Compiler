@@ -17,4 +17,11 @@ if __name__ == "__main__":
     
     scanner = Scanner(src) # src로 Scanner 인스턴스 생성
     parser = Parser(scanner)
-    parser.parse()
+
+    i = 0
+    while True:
+        i += 1
+        print(f"\n{i}번 째 구문분석")
+        if not parser.parse():
+            print("구문분석 종료")
+            break

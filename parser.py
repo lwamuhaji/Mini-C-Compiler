@@ -17,7 +17,10 @@ class Parser:
 
     def parse(self):
         self.get_token_from_scanner()
-        self.pE()
+        if not self.token:
+            return False
+        self.pS()
+        return True
     
     def get_token_from_scanner(self):
         token = self.scanner.get_token()
@@ -25,6 +28,12 @@ class Parser:
         self.token = token
 
     # ----- Non-Terminal -----
+    def pS(self): # S -> id=E | E
+        if self.token.get_id() == TokenID.ID:
+            self.pid(); self.pequal(); self.pE()
+        else:
+            self.pE()
+
     def pE(self): # E -> TE'
         self.pT(); self.pE_()
 
@@ -58,42 +67,56 @@ class Parser:
             self.pdecimal()
     
     # ----- Terminal -----
+    def pequal(self):
+        print(self.token.get_id())
+        if self.token.get_id() == TokenID.ASSIGN:
+            self.get_token_from_scanner()
+        else:
+            raise ParserException("=가 아님")
     def pid(self):
+        print(self.token)
         if self.token.get_id() == TokenID.ID:
             self.get_token_from_scanner()
         else:
             raise ParserException("id가 아님")
     def pdecimal(self):
+        print(self.token)
         if self.token.get_id() == TokenID.DEC:
             self.get_token_from_scanner()
         else:
             raise ParserException("10 진수가 아님")
     def pPlus(self):
+        print(self.token.get_id())
         if self.token.get_id() == TokenID.PLUS:
             self.get_token_from_scanner()
         else:
             raise ParserException("+가 아님")
     def pMinus(self):
+        print(self.token.get_id())
         if self.token.get_id() == TokenID.MINUS:
             self.get_token_from_scanner()
         else:
             raise ParserException("-가 아님")
     def pMultiple(self):
+        print(self.token.get_id())
         if self.token.get_id() == TokenID.MUL:
             self.get_token_from_scanner()
         else:
             raise ParserException("*가 아님") 
     def pDivide(self):
+        print(self.token.get_id())
         if self.token.get_id() == TokenID.DIV:
             self.get_token_from_scanner()
         else:
             raise ParserException("/가 아님")        
     def pOpen(self):
+        print(self.token.get_id())
         if self.token.get_id() == TokenID.OPEN_PARENTHESIS:
             self.get_token_from_scanner()
         else:
             raise ParserException("(가 아님") 
     def pClose(self):
+        print(self.token.get_id())
         if self.token.get_id() == TokenID.CLOSE_PARENTHESIS:
             self.get_token_from_scanner()
         else:
