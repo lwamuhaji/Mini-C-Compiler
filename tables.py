@@ -45,6 +45,24 @@ class TokenID(Enum):
     BREAK = 49
     CONTINUE = 50
 
+    def __str__(self):
+        if self.name == "CLOSE_PARENTHESIS":
+            return ")"
+        elif self.name == "OPEN_PARENTHESIS":
+            return "("
+        elif self.name == "PLUS":
+            return "+"
+        elif self.name == "MINUS":
+            return "-"
+        elif self.name == "MUL":
+            return "*"
+        elif self.name == "DIV":
+            return "/"
+        elif self.name == "DEC":
+            return "ID"
+        else:
+            return self.name
+
 
 KEYWORD_TABLE = {
     "const": TokenID.CONST,

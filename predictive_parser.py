@@ -26,6 +26,28 @@ class Rule(Enum):
     Rule9  = 9
     Rule10 = 10
 
+    def __str__(self):
+        if self.name == "Rule1":
+            return "E  -> TE'"
+        if self.name == "Rule2":
+            return "E' -> +TE'"
+        if self.name == "Rule3":
+            return "E' -> -TE'"
+        if self.name == "Rule4":
+            return "E' -> ε"
+        if self.name == "Rule5":
+            return "T  -> FT'"
+        if self.name == "Rule6":
+            return "T' -> *FT'"
+        if self.name == "Rule7":
+            return "T' -> /FT'"
+        if self.name == "Rule8":
+            return "T' -> ε"
+        if self.name == "Rule9":
+            return "F  -> (E)"
+        if self.name == "Rule10":
+            return "F  -> id"
+
 parsing_table = {
     "E": {
         TokenID.DEC: Rule.Rule1,
@@ -120,20 +142,32 @@ class Parser:
             if top == '$' and token_id == None: # 구문분석 완료
                 break
             elif top == token_id: # 일치
-                print("매칭")
+                print("매칭!")
                 self.stack.pop()
                 tokens.pop(0)
-                print([str(t) for t in self.stack])
+                print('[ ', end='')
+                for t in self.stack:
+                    print(t, end=' ')
+                print(']   [ ', end='')
+                for t in tokens:
+                    print(t, end=' ')
+                print(']')
             else: # 불일치
                 rule = parsing_table[top][token_id]
                 print("선택된 룰:", rule)
                 self.apply_rule(rule)
-                print([str(t) for t in self.stack])
+                print('[ ', end='')
+                for t in self.stack:
+                    print(t, end=' ')
+                print(']  [ ', end='')
+                for t in tokens:
+                    print(t, end=' ')
+                print(']')
 
         print("구문분석 완료")
 
 if __name__ == "__main__":
-    sentence = "4 * )(20 - 10)"
+    sentence = "4 * (20 - 10)"
     print("구문분석 대상:", sentence, end='\n\n')
     scanner = Scanner(sentence)
     parser = Parser(scanner)

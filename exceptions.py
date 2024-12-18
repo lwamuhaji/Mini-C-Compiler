@@ -46,5 +46,5 @@ class ConstException(ScannerException):
         super().__init__(f"올바르지 않은 {type_str} 상수입니다.", scanner)
 
 class ParserException(Exception):
-    def __init__(self):
-        super().__init__("Parsing failed")
+    def __init__(self, str="Parsing failed"):
+        super().__init__(str)

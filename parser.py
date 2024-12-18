@@ -62,39 +62,39 @@ class Parser:
         if self.token.get_id() == TokenID.ID:
             self.get_token_from_scanner()
         else:
-            raise ParserException()
+            raise ParserException("id가 아님")
     def pdecimal(self):
         if self.token.get_id() == TokenID.DEC:
             self.get_token_from_scanner()
         else:
-            raise ParserException()
+            raise ParserException("10 진수가 아님")
     def pPlus(self):
         if self.token.get_id() == TokenID.PLUS:
             self.get_token_from_scanner()
         else:
-            raise ParserException()
+            raise ParserException("+가 아님")
     def pMinus(self):
         if self.token.get_id() == TokenID.MINUS:
             self.get_token_from_scanner()
         else:
-            raise ParserException()        
+            raise ParserException("-가 아님")
     def pMultiple(self):
         if self.token.get_id() == TokenID.MUL:
             self.get_token_from_scanner()
         else:
-            raise ParserException()        
+            raise ParserException("*가 아님") 
     def pDivide(self):
         if self.token.get_id() == TokenID.DIV:
             self.get_token_from_scanner()
         else:
-            raise ParserException()        
+            raise ParserException("/가 아님")        
     def pOpen(self):
         if self.token.get_id() == TokenID.OPEN_PARENTHESIS:
             self.get_token_from_scanner()
         else:
-            raise ParserException()        
+            raise ParserException("(가 아님") 
     def pClose(self):
         if self.token.get_id() == TokenID.CLOSE_PARENTHESIS:
             self.get_token_from_scanner()
         else:
-            raise ParserException()
+            raise ParserException(")가 아님")
