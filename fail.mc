@@ -1,4 +1,5 @@
 int A, B, Sum;
+B = 10.123E*10;
 float _x1, _y1, _zoom;
 char _ch1;
 

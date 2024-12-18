@@ -1,11 +1,12 @@
-# ScannerException: 오류코드와 오류가 발생한 라인을 출력합니다.
-# 다른 Exception 함수들은 ScannerException을 상속받아 구체적인 오류코드를 정의합니다.
+# ScannerException: Exception을 상속받아 오류코드와 오류가 발생한 라인을 메시지로 설정한다. 
+# 다른 Exception Class들은 ScannerException을 상속받아 구체적인 오류 케이스를 정의한다.
 
 class ScannerException(Exception):
     def __init__(self, msg, scanner):
-
+        # 오류가 시작된 라인의 시작 커서는 (전체커서-라인커서)
         start_cursor = scanner.cursor-scanner.line_cursor
         end_cursor = scanner.cursor
+        # 오류가 발생한 라인 전체를 출력하기 위해, end_cursor의 위치를 \n 이나 EOF로 옮긴다.
         while scanner.src[end_cursor] != "\n" and scanner.src[end_cursor] != "\255":
             end_cursor += 1   
         line_src = scanner.src[start_cursor:end_cursor]
@@ -13,7 +14,7 @@ class ScannerException(Exception):
         super().__init__(msg +
                          f"\n{line_src}\n" +
                          f"{'-' * (scanner.line_cursor - 1)}^" +
-                         f"\nline:{scanner.line+1}, cursor:{scanner.line_cursor}")
+                         f"\nline:{scanner.line+1}, pos:{scanner.line_cursor}")
 
 class CharacterException(ScannerException):
     def __init__(self, scanner):

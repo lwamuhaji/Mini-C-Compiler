@@ -76,6 +76,7 @@ class Token:
         elif self.state == 44: # ’ 닫는 따옴표
             return 39
     
+    # 토큰의 값을 리턴한다.
     def get_value(self):
         if self.state == 3: # 식별자인 경우 symbol table 참조
             return sym_table[self.token]
@@ -88,7 +89,8 @@ class Token:
               self.state == 36):  # 상수
             return self.token
         else:
-            return '-'
-        
+            return '-' # 그 외의 경우 토큰의 값은 없다.
+    
+    # toString() 메소드 오버라이드
     def __str__(self):
         return f'({self.get_id()}, {self.get_value()})  {self.token}'
