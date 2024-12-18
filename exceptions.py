@@ -44,4 +44,7 @@ class ConstException(ScannerException):
     def __init__(self, type, scanner):
         type_str = "숫자" if type == 0 else "문자"
         super().__init__(f"올바르지 않은 {type_str} 상수입니다.", scanner)
-    
+
+class ParserException(Exception):
+    def __init__(self):
+        super().__init__("Parsing failed")
