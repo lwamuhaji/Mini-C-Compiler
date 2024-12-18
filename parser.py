@@ -13,6 +13,7 @@ class Parser:
     def __init__(self, scanner: Scanner):
         self.scanner = scanner
         self.tokens = []
+        self.token = None
 
     def parse(self):
         self.get_token_from_scanner()

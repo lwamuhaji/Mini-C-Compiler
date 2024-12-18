@@ -45,6 +45,7 @@ class TokenID(Enum):
     BREAK = 49
     CONTINUE = 50
 
+
 KEYWORD_TABLE = {
     "const": TokenID.CONST,
     "else": TokenID.ELSE,
